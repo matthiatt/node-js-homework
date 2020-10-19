@@ -1,6 +1,12 @@
-//documentation of help: https://commonmark.org/help/
+//---------------------- Sources ---------------------//
+// https://commonmark.org/help/
+// https://medium.com/@er.bharat1992/writing-readme-md-markdown-file-file-bd711d1afbfa
+//https://shields.io/
+
 const fs = require("fs");
 const inquirer = require("inquirer");
+// const { inherits } = require("util");
+let md = require("markdown-it")();
 
 const questions = [
 
@@ -86,4 +92,26 @@ inquirer
             }
             console.log("success");
         });
+    }).then(function({name, userlocation})) {
+    fs.writeFile("index.html", generateHtml(name), function(err) {
+        if(err) throw err;
+        console.log("success");
     })
+    }
+    function generateHtml(name) {
+        return `
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+    <h1>${myname}</h1>
+    </div>
+</body>
+</html>
+        `
+    }
